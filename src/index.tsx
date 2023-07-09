@@ -84,7 +84,7 @@ root.render(
   <RecoilRoot>
     <ThemeProvider theme={darkTheme}>
       <GlobalStyle />
-      <App />
+      <App boardId='string' />
     </ThemeProvider>
   </RecoilRoot>
 );

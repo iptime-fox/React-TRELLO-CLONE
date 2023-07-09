@@ -3,6 +3,7 @@ import { useRecoilState } from 'recoil';
 import { styled } from 'styled-components';
 import { toDoState } from './atoms';
 import Board from './Components/Board';
+import { useForm } from 'react-hook-form';
 
 const Wrapper = styled.div`
   display: flex;
@@ -22,6 +23,20 @@ const Boards = styled.div`
   gap: 10px;
 `;
 
+const Form = styled.form`
+  input {
+    border: none;
+    border-bottom: 2px solid #6f63ef;
+    background-color: transparent;
+    margin-bottom: 1rem;
+    text-align: center;
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 18px;
+  }
+  width: 200px;
+`;
+
 const DeleteBtn = styled.div`
   position: absolute;
   right: 10%;
@@ -30,11 +45,28 @@ const DeleteBtn = styled.div`
   font-size: 2.5rem;
 `;
 
-function App() {
+interface IBoardProps {
+  boardId: string;
+}
+
+interface IForm {
+  category: string;
+}
+
+function App({ boardId }: IBoardProps) {
   const [toDos, setToDos] = useRecoilState(toDoState);
+  const { register, setValue, handleSubmit } = useForm<IForm>();
+  const onValid = ({ category }: IForm) => {
+    setToDos((allBoards) => {
+      const newBoards = { ...allBoards, [category]: [] };
+      return newBoards;
+    });
+    setValue('category', '');
+  };
   const onDragEnd = (info: DropResult) => {
     const { destination, draggableId, source } = info;
     if (!destination) return;
+
     if (destination?.droppableId === source.droppableId) {
       setToDos((allBoards) => {
         const boardCopy = [...allBoards[source.droppableId]];
@@ -47,6 +79,7 @@ function App() {
         };
       });
     }
+
     if (destination?.droppableId !== source.droppableId) {
       setToDos((allBoards) => {
         const sourceBoard = [...allBoards[source.droppableId]];
@@ -65,6 +98,13 @@ function App() {
   return (
     <Wrapper>
       <DragDropContext onDragEnd={onDragEnd}>
+        <Form onSubmit={handleSubmit(onValid)}>
+          <input
+            {...register('category', { required: true })}
+            type='text'
+            placeholder='+ Add Category'
+          />
+        </Form>
         <Boards>
           {Object.keys(toDos).map((boardId) => (
             <Board boardId={boardId} toDos={toDos[boardId]} />
