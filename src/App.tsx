@@ -3,7 +3,6 @@ import { useRecoilState } from 'recoil';
 import { styled } from 'styled-components';
 import { toDoState } from './atoms';
 import Board from './Components/Board';
-// import { Helmet } from 'react-helmet';
 
 const Wrapper = styled.div`
   display: flex;
@@ -65,9 +64,6 @@ function App() {
   };
   return (
     <Wrapper>
-      {/* <Helmet>
-        <title>ToDo</title>
-      </Helmet> */}
       <DragDropContext onDragEnd={onDragEnd}>
         <Boards>
           {Object.keys(toDos).map((boardId) => (

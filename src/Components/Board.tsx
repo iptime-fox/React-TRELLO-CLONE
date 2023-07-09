@@ -7,7 +7,7 @@ import { useSetRecoilState } from 'recoil';
 
 const Wrapper = styled.div`
   background-color: ${(props) => props.theme.boardColor};
-  padding-top: 10px;
+  padding-top: 20px;
   border-radius: 5px;
   min-height: 300px;
   display: flex;
