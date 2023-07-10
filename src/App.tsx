@@ -37,13 +37,13 @@ const Form = styled.form`
   width: 200px;
 `;
 
-const DeleteBtn = styled.div`
-  position: absolute;
-  right: 10%;
-  bottom: 10%;
-  transform: translate(-10%, -10%);
-  font-size: 2.5rem;
-`;
+// const DeleteBtn = styled.div`
+//   position: absolute;
+//   right: 10%;
+//   bottom: 10%;
+//   transform: translate(-10%, -10%);
+//   font-size: 2.5rem;
+// `;
 
 interface IBoardProps {
   boardId: string;
@@ -111,7 +111,7 @@ function App({ boardId }: IBoardProps) {
           ))}
         </Boards>
       </DragDropContext>
-      <DeleteBtn>🗑️</DeleteBtn>
+      {/* <DeleteBtn>🗑️</DeleteBtn> */}
     </Wrapper>
   );
 }
