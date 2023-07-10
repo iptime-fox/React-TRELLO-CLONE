@@ -111,7 +111,6 @@ function App({ boardId }: IBoardProps) {
           ))}
         </Boards>
       </DragDropContext>
-      {/* <DeleteBtn>🗑️</DeleteBtn> */}
     </Wrapper>
   );
 }
